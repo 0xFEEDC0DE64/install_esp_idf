@@ -27,10 +27,12 @@ runs:
       #if: steps.cache-espressif.outputs.cache-hit != 'true'
       #run: $(realpath -s "${{ inputs.idfpath }}")/install.sh
       run: |
-        if echo ${{ steps.cache-espressif.outputs.cache-hit }} | grep -c "true"
-        then
-          echo "Cache hit - skipping esp-idf install"
-        else
-          $(realpath -s "${{ inputs.idfpath }}")/install.sh
-        fi
+        #if echo ${{ steps.cache-espressif.outputs.cache-hit }} | grep -c "true"
+        #then
+        #  echo "Cache hit - skipping esp-idf install"
+        #else
+        #  $(realpath -s "${{ inputs.idfpath }}")/install.sh
+        #fi
+        # seems there is a caching issue sometimes, install.sh should be fast if already installed
+        $(realpath -s "${{ inputs.idfpath }}")/install.sh
       shell: bash
